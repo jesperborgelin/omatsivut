@@ -24,9 +24,19 @@
 
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                 <ul class="nav navbar-nav navbar-right">
-                                    <li><a href="#home">Koti</a></li>
-                                    <li><a href="#service">Projektit</a></li>
+                                  <?php if (isset($_SESSION['username'])): ?>
+                                  <li><a>Kirjauduttu sisään nimellä <?php echo $_SESSION['username']; ?></a></li>
+                                  <?php endif; ?>
+                                    <li><a href="index.php">Koti</a></li>
+                                    <li><a href="projektit.php">Projektit</a></li>
                                     <li><a href="#contact">Ota yhteyttä</a></li>
+                                    <?php if (!isset($_SESSION['username'])): ?>
+                                      <li><a href="login.php">Kirjaudu</a></li>
+                                      <?php else: ?>
+
+                                        <li><a href="userpanel.php">User panel</a></li>
+                                    <?php endif; ?>
+
                                 </ul>
                             </div>
 

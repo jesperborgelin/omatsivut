@@ -1,5 +1,21 @@
 <?php
+require('config/config.php');
+require('config/db.php');
+session_start();
+//Create query
+$query = 'SELECT * FROM aanet';
 
+//Get result
+$result = mysqli_query($conn, $query);
+
+//Fetch data
+$aanet = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+//free result
+mysqli_free_result($result);
+
+//Close connection
+mysqli_close($conn);
 
 ?>
 
@@ -179,6 +195,9 @@
                                             <p>Tyytyväisiä asiakkaita</p>
                                         </div>
                                     </div>
+                                    <?php $i = 0; ?>
+                                    <?php foreach ($aanet as $aani ) : $i++ ?>
+                                    <?php endforeach ?>
                                     <div class="col-sm-3 col-xs-12">
                                         <div class="single_counter_right">
                                             <i class="fa fa-line-chart"></i>
@@ -189,7 +208,7 @@
                                     <div class="col-sm-3 col-xs-12">
                                         <div class="single_counter_right">
                                             <i class="lnr lnr-heart"></i>
-                                            <h2 class="statistic-counter">0</h2>
+                                            <h2 class="statistic-counter"><?php echo $i ; ?></h2>
                                             <p>Positiivisia arvosanoja</p>
                                         </div>
                                     </div>
@@ -197,7 +216,7 @@
                                         <div class="single_counter_right">
                                             <i class="lnr lnr-gift"></i>
                                             <h2 class="statistic-counter">0</h2>
-                                            <p>Freebies Released</p>
+                                            <p>Jotain tähän</p>
                                         </div>
                                     </div>
                                 </div>
@@ -222,13 +241,13 @@
                             <div class="contact_contant">
 
                                 <div class="col-sm-6 col-xs-12">
-                                    <h4>Leave A Message</h4>
+                                    <h4>Jätä viesti</h4>
                                     <div class="single_contant_left">
-                                        <form action="#" id="formid">
+                                        <form action="viesti.php" method="get" id="formid">
                                             <!--<div class="col-lg-8 col-md-8 col-sm-10 col-lg-offset-2 col-md-offset-2 col-sm-offset-1">-->
 
                                             <div class="form-group">
-                                                <input type="text" class="form-control" name="name" placeholder="Etunimi" required="">
+                                                <input type="text" class="form-control" name="nimi" placeholder="Etunimi" required="">
                                             </div>
 
                                             <div class="form-group">
@@ -236,13 +255,13 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <textarea class="form-control" name="message" rows="8" placeholder="Viesti"></textarea>
+                                                <textarea class="form-control" name="viesti" rows="8" placeholder="Viesti"></textarea>
                                             </div>
                                             <div class="form-group">
-                                              <label>Lisää positiivinen arvosana</label>  <input type="radio" name="positiivinen">
+                                              <label>Lisää positiivinen arvosana</label>  <input value="positiivinen" type="radio" name="positiivinen">
                                             </div>
                                             <div class="form-group">
-                                              <label>Älä lisää positiivista arvosanaa</label>  <input type="radio" name="positiivinen">
+                                              <label>Älä lisää positiivista arvosanaa</label>  <input value="eipositiivinen" type="radio" name="positiivinen">
                                             </div>
 
                                             <div class="">
@@ -276,32 +295,7 @@
 
 
 
-        <footer id="footer" class="footer">
-            <div class="container">
-                <div class="main_footer">
-                    <div class="row">
-
-                        <div class="col-sm-6 col-xs-12">
-                            <div class="copyright_text">
-                                <p class=" wow fadeInRight" data-wow-duration="1s">Made with <i class="fa fa-heart"></i> by <a href="http://bootstrapthemes.co">Bootstrap Themes</a>2016. All Rights Reserved</p>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-xs-12">
-                            <div class="footer_socail">
-                                <a href=""><i class="fa fa-facebook"></i></a>
-                                <a href=""><i class="fa fa-twitter"></i></a>
-                                <a href=""><i class="fa fa-google-plus"></i></a>
-                                <a href=""><i class="fa fa-rss"></i></a>
-                                <a href=""><i class="fa fa-instagram"></i></a>
-                                <a href=""><i class="fa fa-dribbble"></i></a>
-                                <a href=""><i class="fa fa-behance"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
+<?php include 'inc/footer.php'; ?>
 
 
 

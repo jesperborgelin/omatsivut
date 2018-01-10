@@ -4,16 +4,16 @@ require('config/db.php');
 session_start();
 //Create query
 $query = 'SELECT * FROM aanet';
-
+$query2 = 'SELECT * FROM valmiitprojektit';
 //Get result
 $result = mysqli_query($conn, $query);
-
+$result2 = mysqli_query($conn, $query2);
 //Fetch data
 $aanet = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
+$valmiitprojektit = mysqli_fetch_all($result2, MYSQLI_ASSOC);
 //free result
 mysqli_free_result($result);
-
+mysqli_free_result($result2);
 //Close connection
 mysqli_close($conn);
 
@@ -198,10 +198,13 @@ mysqli_close($conn);
                                     <?php $i = 0; ?>
                                     <?php foreach ($aanet as $aani ) : $i++ ?>
                                     <?php endforeach ?>
+                                    <?php $o = 0; ?>
+                                    <?php foreach ($valmiitprojektit as $valmiit): $o++ ?>
+                                    <?php endforeach; ?>
                                     <div class="col-sm-3 col-xs-12">
                                         <div class="single_counter_right">
                                             <i class="fa fa-line-chart"></i>
-                                            <h2 class="statistic-counter">10</h2>
+                                            <h2 class="statistic-counter"><?php echo $o; ?></h2>
                                             <p>Projekteja tehty</p>
                                         </div>
                                     </div>
@@ -258,7 +261,7 @@ mysqli_close($conn);
                                                 <textarea class="form-control" name="viesti" rows="8" placeholder="Viesti"></textarea>
                                             </div>
                                             <div class="form-group">
-                                              <label>Lisää positiivinen arvosana</label>  <input value="positiivinen" type="radio" name="positiivinen">
+                                              <label>Lisää positiivinen arvosana</label>  <input checked value="positiivinen" type="radio" name="positiivinen">
                                             </div>
                                             <div class="form-group">
                                               <label>Älä lisää positiivista arvosanaa</label>  <input value="eipositiivinen" type="radio" name="positiivinen">
